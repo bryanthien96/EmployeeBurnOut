@@ -22,27 +22,34 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                 navbarPage(
                   theme = "journal",  # <--- To use a theme, uncomment this
                   "Employee Burnout Prediction", 
-                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), align="absolute", height=890, width=1860)),
+                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), align="absolute", height=650, width=1480)),
                   tabPanel("Exploratory Data Analysis", icon = icon("bar-chart"),
                            sidebarPanel(
                              h3('Select the Category'),
                              varSelectInput("eda", "Frequency of Burnout Category by Group:", dfclean),
-                             checkboxInput("side", "Create a Side-By-Side Bar Chart")),
+                             checkboxInput("side", "Create a Side-By-Side Bar Chart"),
+                             h5("Designation:"),
+                             h5(code("0 - Interns/Trainee/Junior Executive")),
+                             h5(code("1 - Senior Executive/Team Leader/Assistant Manager")),
+                             h5(code("2 - Senior Manager/Branch Manager/Regional Manager")),
+                             h5(code("3 - Diretor/Assistant Director")),
+                             h5(code("4 - Vice President/Assistant Vice President")),
+                             h5(code("5 - President/CEO/CFO/CMO/Chairman"))),
                            mainPanel(plotOutput("plot"))),
                   tabPanel("Mental Fatigue Scores Quiz", icon = icon("file-alt"), 
                            sidebarPanel(
                             h2('Mental Fatigue Scores Quiz'),
-                            h3('Kindly take this quiz first before you proceed to do the burnout test.'),
-                            h4('This quiz is rated in a scale of 1 to 5 by which:'),
-                            h4(div('1 - Not at all', style = "color:red")),
-                            h4(div('2 - A little bit', style = "color:red")),
-                            h4(div('3 - Moderately', style = "color:red")),
-                            h4(div('4 - Quite a bit', style = "color:red")),
-                            h4(div('5 - Extremely', style = "color:red")),
+                            h5('Kindly take this quiz first before you proceed to do the burnout test.'),
+                            h5('This quiz is rated in a scale of 1 to 5 by which:'),
+                            h5(div('1 - Not at all', style = "color:red")),
+                            h5(div('2 - A little bit', style = "color:red")),
+                            h5(div('3 - Moderately', style = "color:red")),
+                            h5(div('4 - Quite a bit', style = "color:red")),
+                            h5(div('5 - Extremely', style = "color:red")),
                             sliderInput('Q1', 'Have you felt fatigue in the past month?', 3, min = 1, max = 5, step = 1),
                             sliderInput('Q2', 'Do you find it difficult to start things?', 3, min = 1, max = 5, step = 1),
                             sliderInput('Q3', 'Does your brain become fatigued quickly when you have to think hard?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q4', 'Do you take a long time to recover after you have worked “until you drop” or are no longer able to concentrate?', 3, min = 1, max = 5, step = 1),
+                            sliderInput('Q4', 'Do you take a long time to recover after you have worked âuntil you dropâ or are no longer able to concentrate?', 3, min = 1, max = 5, step = 1),
                             sliderInput('Q5', 'Do you find it difficult to gather your thoughts and concentrate?', 3, min = 1, max = 5, step = 1),
                             sliderInput('Q6', 'Do you forget things more often than before?', 3, min = 1, max = 5, step = 1),
                             sliderInput('Q7', 'Do you feel that it takes an unusually long time to conclude a train of thought or solve a task that requires mental effort?', 3, min = 1, max = 5, step = 1),
@@ -87,17 +94,18 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                              tags$label(h1('Stage of Burnout :')), # Status/Output Text Box
                              verbatimTextOutput('status'), # Prediction results table
                              verbatimTextOutput('contents'),
-                             h2(":: User's Guide ::"),
-                             h3("1. Input the necessary parameters to run the prediction."),
-                             h3("2. Designation is ranked from 1 to 5 as below:"),
-                             h4(code("1 - Interns/Trainee/Junior Executive")),
-                             h4(code("2 - Team Leader/Senior Executive/Assistant Manager")),
-                             h4(code("3 - Senior Manager/Branch Manager/Regional Manager")),
-                             h4(code("4 - Vice President/Assistant Vice President")),
-                             h4(code("5 - President/CEO/CFO/CMO/Chairman")),
-                             h3("3. Resource Allocation represents the number of hours you work in a day."),
-                             h3("4. Mental Fatigue Score is the score you obtained from the quiz in the previous tab."),
-                             h3('5. Click <submit> button to get the result!')
+                             h3(":: User's Guide ::"),
+                             h4("1. Input the necessary parameters to run the prediction."),
+                             h4("2. Designation is ranked from 1 to 5 as below:"),
+                             h5(code("0 - Interns/Trainee/Junior Executive")),
+                             h5(code("1 - Senior Executive/Team Leader/Assistant Manager")),
+                             h5(code("2 - Senior Manager/Branch Manager/Regional Manager")),
+                             h5(code("3 - Diretor/Assistant Director")),
+                             h5(code("4 - Vice President/Assistant Vice President")),
+                             h5(code("5 - President/CEO/CFO/CMO/Chairman")),
+                             h4("3. Resource Allocation represents the number of hours you work in a day."),
+                             h4("4. Mental Fatigue Score is the score you obtained from the quiz in the previous tab."),
+                             h4('5. Click <Submit> button to get the result!')
                            ))
                   
                 ) # navbarPage
@@ -147,7 +155,7 @@ Thus, you are recommended to start developing positive coping strategies, such a
     } else if (Output == "moderate") {
       print("You are in the middle stage of burnout right now.
 You may find your optimism waning, as well as notice common stress symptoms affecting you physically, mentally, or emotionally.
-Please reach out to your colleagues, friends, family or loved ones for support that might help you cope before your condition worsens to the last stage.")
+Please reach out to a support network of people you trust who might help you cope before your condition worsens to the last stage.")
     } else {
       paste("CAUTION! You are in the most critical stage of burn out right now!
 You may feel that your mind is never quiet and peace seems unattainable at this point.
