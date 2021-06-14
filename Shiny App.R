@@ -7,8 +7,8 @@ library(shinyWidgets)
 
 setBackgroundImage(src = NULL, shinydashboard = FALSE)
 
-shiny_background <- base64enc::dataURI(file="background 3.png", mime="image/png")
-intro_background <- base64enc::dataURI(file="intro.png", mime="image/png")
+shiny_background <- base64enc::dataURI(file="www/background.png", mime="image/png")
+intro_background <- base64enc::dataURI(file="www/Intro.png", mime="image/png")
 
 #read the dataset for EDA
 dfclean <- read.csv("dfclean.csv")
@@ -20,9 +20,9 @@ model <- readRDS("model.rds")
 ui <- fluidPage(setBackgroundImage(src=shiny_background),
                 theme = shinytheme("journal"),
                 navbarPage(
-                  theme = "journal",  # <--- To use a theme, uncomment this
+                  theme = "journal",  
                   "Employee Burnout Prediction", 
-                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), align="absolute", height=650, width=1480)),
+                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), align="left", height=645, width=1480)),
                   tabPanel("Exploratory Data Analysis", icon = icon("bar-chart"),
                            sidebarPanel(
                              h3('Select the Category'),
@@ -38,32 +38,32 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                            mainPanel(plotOutput("plot"))),
                   tabPanel("Mental Fatigue Scores Quiz", icon = icon("file-alt"), 
                            sidebarPanel(
-                            h2('Mental Fatigue Scores Quiz'),
-                            h5('Kindly take this quiz first before you proceed to do the burnout test.'),
-                            h5('This quiz is rated in a scale of 1 to 5 by which:'),
-                            h5(div('1 - Not at all', style = "color:red")),
-                            h5(div('2 - A little bit', style = "color:red")),
-                            h5(div('3 - Moderately', style = "color:red")),
-                            h5(div('4 - Quite a bit', style = "color:red")),
-                            h5(div('5 - Extremely', style = "color:red")),
-                            sliderInput('Q1', 'Have you felt fatigue in the past month?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q2', 'Do you find it difficult to start things?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q3', 'Does your brain become fatigued quickly when you have to think hard?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q4', 'Do you take a long time to recover after you have worked âuntil you dropâ or are no longer able to concentrate?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q5', 'Do you find it difficult to gather your thoughts and concentrate?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q6', 'Do you forget things more often than before?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q7', 'Do you feel that it takes an unusually long time to conclude a train of thought or solve a task that requires mental effort?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q8', 'Do you find it difficult to cope with stress that is, doing several things at the same time while under time pressure?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q9', 'Do you find that you cry more easily than previously?', 3, min = 1, max = 5, step = 1),
-                            sliderInput('Q10', 'Are you unusually short-tempered or irritable about things that previously did not bother you?', 3, min = 1, max = 5, step = 1),
-                            width=20),
-                          mainPanel(
-                            h3('Results of Mental Fatigue Scale (MFS)'),
-                            h4('Your mental fatigue score is'),
+                             h2('Mental Fatigue Scores Quiz'),
+                             h5('Kindly take this quiz first before you proceed to do the burnout test.'),
+                             h5('This quiz is rated in a scale of 1 to 5 by which:'),
+                             h5(div('1 - Not at all', style = "color:red")),
+                             h5(div('2 - A little bit', style = "color:red")),
+                             h5(div('3 - Moderately', style = "color:red")),
+                             h5(div('4 - Quite a bit', style = "color:red")),
+                             h5(div('5 - Extremely', style = "color:red")),
+                             sliderInput('Q1', 'Have you felt fatigue in the past month?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q2', 'Do you find it difficult to start things?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q3', 'Does your brain become fatigued quickly when you have to think hard?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q4', 'Do you take a long time to recover after you have worked âuntil you dropâ or are no longer able to concentrate?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q5', 'Do you find it difficult to gather your thoughts and concentrate?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q6', 'Do you forget things more often than before?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q7', 'Do you feel that it takes an unusually long time to conclude a train of thought or solve a task that requires mental effort?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q8', 'Do you find it difficult to cope with stress that is, doing several things at the same time while under time pressure?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q9', 'Do you find that you cry more easily than previously?', 3, min = 1, max = 5, step = 1),
+                             sliderInput('Q10', 'Are you unusually short-tempered or irritable about things that previously did not bother you?', 3, min = 1, max = 5, step = 1),
+                             width=20),
+                           mainPanel(
+                             h3('Results of Mental Fatigue Scale (MFS)'),
+                             h4('Your mental fatigue score is'),
                              verbatimTextOutput('ValueMFS'),
-                            width = 20
+                             width = 20
                            )),
-                          
+                  
                   tabPanel("Prediction", icon = icon("cogs"), 
                            sidebarPanel(
                              tags$label(h3('Input Parameters')),
@@ -78,8 +78,8 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                                          choices = list("No" = "No", "Yes" = "Yes"), 
                                          selected = "No"),
                              numericInput("Designation", label = "Designation:", 
-                                          min = 1, max = 5,
-                                          value = 1),
+                                          min = 0, max = 5,
+                                          value = 0),
                              numericInput("Resource.Allocation", label = "Resource Allocation:", 
                                           min = 1, max = 24,
                                           value = 1),
@@ -96,7 +96,7 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                              verbatimTextOutput('contents'),
                              h3(":: User's Guide ::"),
                              h4("1. Input the necessary parameters to run the prediction."),
-                             h4("2. Designation is ranked from 1 to 5 as below:"),
+                             h4("2. Designation is ranked from 0 to 5 as below:"),
                              h5(code("0 - Interns/Trainee/Junior Executive")),
                              h5(code("1 - Senior Executive/Team Leader/Assistant Manager")),
                              h5(code("2 - Senior Manager/Branch Manager/Regional Manager")),
@@ -155,11 +155,11 @@ Thus, you are recommended to start developing positive coping strategies, such a
     } else if (Output == "moderate") {
       print("You are in the middle stage of burnout right now.
 You may find your optimism waning, as well as notice common stress symptoms affecting you physically, mentally, or emotionally.
-Please reach out to a support network of people you trust who might help you cope before your condition worsens to the last stage.")
+Hence, please reach out to a support network of people you trust who might help you cope before your condition worsens to the last stage.")
     } else {
       paste("CAUTION! You are in the most critical stage of burn out right now!
 You may feel that your mind is never quiet and peace seems unattainable at this point.
-Therefore, you are highly encouraged to seek for external support (pyschiatrist or counselling service) for a better recovery process.")
+Therefore, you are highly encouraged to seek for external support (counselling service/psychologist/psychiatrist) for a better recovery process.")
     }
   })
   
@@ -169,9 +169,9 @@ Therefore, you are highly encouraged to seek for external support (pyschiatrist 
       ggplot(dfclean, aes(!!input$eda, fill=Burn_Out_Status)) +
         geom_bar(position = position_dodge(), width=0.5) + theme_minimal()
     } else{
-    ggplot(dfclean, aes(!!input$eda, fill=Burn_Out_Status)) +
-      geom_bar(width = 0.5) + theme_minimal()
-      }})
+      ggplot(dfclean, aes(!!input$eda, fill=Burn_Out_Status)) +
+        geom_bar(width = 0.5) + theme_minimal()
+    }})
   output$ValueMFS <- renderPrint({MFS(input$Q1,input$Q2,input$Q3,input$Q4,input$Q5,input$Q6,input$Q7,input$Q8,input$Q9,input$Q10)})
   output$contents <- renderPrint({
     if (input$submitbutton>0) { 
