@@ -22,7 +22,7 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                 navbarPage(
                   theme = "journal",  
                   "Employee Burnout Prediction", 
-                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), align="left", height=645, width=1480)),
+                  tabPanel("Introduction", icon = icon("book"), img(src=(intro_background), height=630, width=1470)),
                   tabPanel("Exploratory Data Analysis", icon = icon("bar-chart"),
                            sidebarPanel(
                              h3('Select the Category'),
