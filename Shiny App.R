@@ -92,7 +92,7 @@ ui <- fluidPage(setBackgroundImage(src=shiny_background),
                            
                            mainPanel(
                              tags$label(h1('Stage of Burnout :')), # Status/Output Text Box
-                             verbatimTextOutput('status'), # Prediction results table
+                             verbatimTextOutput('status'), # Prediction results
                              verbatimTextOutput('contents'),
                              h3(":: User's Guide ::"),
                              h4("1. Input the necessary parameters to run the prediction."),
@@ -182,7 +182,7 @@ Therefore, you are highly encouraged to seek for external support (counselling s
   })
   
   
-  # Prediction results table
+  # Prediction results
   output$status <- renderText({
     if (input$submitbutton>0) { 
       isolate(datasetInput()) 
