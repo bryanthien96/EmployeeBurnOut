@@ -4,7 +4,6 @@ library(randomForest)
 
 #Importing the dataset
 getwd()
-setwd("C:/Users/bryan/OneDrive/Desktop/UM/Sem 1/WQD7001_Principles of Data Science/Assignment")
 data <- read.csv("train.csv")
 str(data)
 
